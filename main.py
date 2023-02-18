@@ -23,20 +23,16 @@ def get_connection():
 	return HTTPSConnection("discordapp.com", 443) 
  
 def send_message(conn, channel_id, message_data): 
-    try: 
-        conn.request("POST", f"/api/v7/channels/{channel_id}/messages", message_data, header_data) 
-        resp = conn.getresponse() 
-         
-        if 199 < resp.status < 300: 
-            print("Message Sent") 
-            pass 
- 
-        else: 
-            stderr.write(f"HTTP {resp.status}: {resp.reason}\n") 
-            pass 
- 
-    except: 
-        stderr.write("Error\n") 
+  try: 
+    conn.request("POST", f"/api/v7/channels/{channel_id}/messages", message_data, header_data)
+    resp = conn.getresponse() 
+
+    if 199 < resp.status < 300: 
+      print("Message Sent")
+    else: 
+      stderr.write(f"HTTP {resp.status}: {resp.reason}\n")
+  except: 
+      stderr.write("Error\n") 
  
 def main(): 
 	message_data = { 
